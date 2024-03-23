@@ -1,26 +1,26 @@
 import java.util.Scanner;
 
 
+record MileObj(double mileValue){};
+
 
 class RewardValue{
     
     private double cashValue;
-    private double milesValue;
+    private MileObj mileObj;
 
     RewardValue(double cashValue){
         this.cashValue = cashValue;
     }
 
-    RewardValue(int milesValue){
-        this.milesValue = milesValue;
-    }
-
-
-    double getCashValue(){
-        return this.milesValue*0.0035;
+    RewardValue(MileObj mileObj){ // Assumed data type of mileValue as an Object, Need more info about the type of mielObj.
+        this.mileObj = new MileObj(mileObj.mileValue());
     }
 
     // miles to cash at a rate of 0.0035.
+    double getCashValue(){
+        return this.mileObj.mileValue()*0.0035;
+    }
 
     double getMilesValue(){
         return this.cashValue/0.0035;
@@ -49,5 +49,6 @@ public class RewardsConverter {
         var rewardsValue = new RewardValue(cashValue);
         
         System.out.println("$" + input_value + " is worth " + rewardsValue.getMilesValue() + " miles");
+
     }
 }
